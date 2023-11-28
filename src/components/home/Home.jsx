@@ -5,8 +5,6 @@ import Banner from "./Banner";
 import Footer from "@/src/components/reusable/Footer"
 import Offers from "./Offers";
 
-//<a href="https://www.flaticon.com/free-icons/quiz" title="quiz icons">Quiz icons created by Freepik - Flaticon</a>
-
 const Home = () => {
   return (
     <div className="bg-white sm:bg-mainCyan h-full">

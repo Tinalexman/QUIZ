@@ -29,7 +29,7 @@ const Banner = () => {
             },
           }}
           onClick={() => {}}
-          className="bg-deepGreen px-3 py-2 shadow-xl sm:mt-16 mt-8 sm:w-full w-[200px] hover:bg-mainCyan hover:text-slate-950 font-medium flex justify-center items-center gap-2"
+          className="bg-deepGreen px-3 py-2 shadow-xl sm:mt-16 mt-8 sm:w-full w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium flex justify-center items-center gap-2"
         >
           Take A Quizz
           <FaBookOpen size={"20px"} />
