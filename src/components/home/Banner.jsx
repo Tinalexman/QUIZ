@@ -11,13 +11,17 @@ const Banner = () => {
   return (
     <div className="flex sm:flex-col h-auto mt-16 px-[10%] sm:px-[5%]">
       <div className="w-[40vw] sm:w-full sm:flex-col flex justify-center flex-col">
-        <p className="text-6xl sm:text-center sm:text-4xl font-extrabold leading-tight text-deepGreen">
+        <p className="text-6xl sm:text-center sm:text-4xl font-extrabold leading-tight sm:mt-8 text-deepGreen">
           Challenge Your Mind
         </p>
         <p className="text-slate-950 sm:text-center text-[20px] mt-5">
           Ignite your curiosity with our thought-provoking quizzes. A platform
           where learning is exciting, challenging and enjoyable
         </p>
+
+        <div className="bg-mainCyan mt-10 mb-10 clip-path-mypolygon h-[100px] w-[300px]">
+
+        </div>
 
         <motion.button
           animate={{
