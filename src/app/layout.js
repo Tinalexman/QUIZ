@@ -9,7 +9,7 @@ const worksans = Work_Sans({
 });
 
 export const metadata = {
-  title: "QUIZZ",
+  title: "Quizz",
   description: "How smart are you?",
 };
 
