@@ -18,8 +18,6 @@ const Banner = () => {
           Ignite your curiosity with our thought-provoking quizzes. A platform
           where learning is exciting, challenging and enjoyable.
         </p>
-
-
         <motion.button
           animate={{
             y: ["0%", "10%", "0%"],
