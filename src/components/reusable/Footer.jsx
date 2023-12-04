@@ -20,7 +20,7 @@ const Footer = () => {
             "Explore, Play, Conquer - Your Quizz Adventure Awaits!"
           </p>
 
-          <Link href={""} className=" text-deepGreen text-[16px] mt-10 sm:mt-5">
+          <Link href={"/quizz"} className=" text-deepGreen text-[16px] mt-10 sm:mt-5">
             Take A Quizz
           </Link>
         </div>

@@ -24,7 +24,7 @@ const Reason = () => {
           <p className="text-deepGreen font-extrabold mt-10 sm:text-2xl text-4xl text-center ">
             Diverse Quiz Realms Await You
           </p>
-          <p className="text-slate-950 text-[18px] sm:text-[16px] sm:pb-10 font-normal text-center mt-10">
+          <p className="text-slate-950 text-[18px] sm:text-[16px] pb-10 font-normal text-center mt-10">
             From science to history, our extensive range of quiz categories
             caters to every curious mind. Dive into your favourite subjects,
             chalenge yourself, and emerge as the ultimate quiz champion. Let the
