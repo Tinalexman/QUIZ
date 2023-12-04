@@ -4,6 +4,7 @@ import Nav from "@/src/components/reusable/Nav";
 import Banner from "./Banner";
 import Footer from "@/src/components/reusable/Footer"
 import Offers from "./Offers";
+import Reason from "./Reason";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Nav useCyan={true}/>
       <Banner />
       <Offers />
+      <Reason />
       <Footer />
     </div>
   );

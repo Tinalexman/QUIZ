@@ -29,7 +29,6 @@ const OfferCard = ({ image, name, key }) => {
           duration: 3,
           repeat: Infinity,
           ease: "easeInOut",
-          
         },
       }}
 

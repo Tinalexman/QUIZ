@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
-    <div className="flex sm:flex-col clip-path-mypolygon sm:clip-path-none bg-mainCyan pt-16 px-[10%] sm:px-[5%] w-[100vw] h-[500px] sm:h-auto">
+    <div className="flex sm:flex-col clip-path-mypolygon sm:clip-path-none bg-mainCyan pt-10 px-[10%] sm:px-[5%] w-[100vw] h-[500px] sm:h-auto">
       <div className="w-[40vw] sm:w-full sm:flex-col flex justify-center flex-col">
         <p className="text-6xl sm:text-center sm:text-4xl font-extrabold leading-tight sm:mt-8 text-deepGreen">
           Challenge Your Mind
