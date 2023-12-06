@@ -24,32 +24,6 @@ module.exports = {
         lightGrey: "#DED5EA",
         mainBrown: "#472B29",
       },
-      screens: {
-        sm: {
-          min: "320px",
-          max: "425px",
-        },
-        md: {
-          min: "426px",
-          max: "768px",
-        },
-        lg: {
-          min: "769px",
-          max: "1024px",
-        },
-        xl: {
-          min: "1025px",
-          max: "1280px",
-        },
-        xl2: {
-          min: "1281px",
-          max: "1536px",
-        },
-        xl4: {
-          min: "1537px",
-          max: "1920px",
-        },
-      },
       fontFamily: {
         body: ["Work Sans", "sans-serif"],
       },

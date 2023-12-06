@@ -57,15 +57,15 @@ const Offers = () => {
   ];
 
   return (
-    <div className="pt-20 pb-20 flex flex-col bg-white">
-      <p className="text-deepGreen font-extrabold sm:text-2xl text-4xl text-center">
+    <div className="py-20 flex flex-col bg-white px-[10%]">
+      <p className="text-deepGreen font-extrabold text-2xl lg:text-4xl text-center">
         Categories
       </p>
       <p className="text-slate-950 text-[16px] font-normal text-center mt-2">
         Dive into a world of quizzes designed to entertain and educate
       </p>
 
-      <div className="flex justify-around mt-20 sm:gap-10 sm:flex-col w-full px-[10%]">
+      <div className="flex justify-around mt-20 gap-10 flex-col lg:flex-row w-full px-[10%]">
         {offers.map((offer, i) => {
           return i < 5 ? (
             <OfferCard key={i} image={offer.image} name={offer.name} />
@@ -74,7 +74,7 @@ const Offers = () => {
           );
         })}
       </div>
-      <div className="flex justify-around mt-20 sm:gap-10 sm:mt-10 sm:flex-col w-full px-[10%]">
+      <div className="flex justify-around mt-20 gap-10 flex-col lg:flex-row w-full px-[10%]">
         {offers.map((offer, i) => {
           return i >= 5 ? (
             <OfferCard key={i} image={offer.image} name={offer.name} />

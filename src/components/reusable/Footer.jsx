@@ -5,31 +5,31 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="bg-white w-full flex flex-col px-[10%] sm:px-[5%] pb-4">
-      <div className="flex justify-between sm:flex-col">
+    <div className="bg-white w-full flex flex-col lg:px-[10%] px-[5%] pb-4">
+      <div className="flex justify-between flex-col lg:flex-row">
         <div className="flex flex-col">
-          <Link href={"/"} className="flex gap-2 items-center sm:mt-5">
+          <Link href={"/"} className="flex gap-2 items-center mt-5 lg:mt-0">
             <Image
               src={Logo}
               alt=""
-              className="w-[75px] sm:w-[50px] h-[75px] sm:h-[50px]"
+              className="lg:w-[75px] w-[50px] h-auto"
             />
-            <p className={`text-[32px] sm:text-[20px] text-deepGreen`}>Quizz</p>
+            <p className={`lg:text-[32px] text-[20px] text-deepGreen`}>Quizz</p>
           </Link>
-          <p className="text-slate-950 text-[16px] sm:mt-3">
+          <p className="text-slate-950 text-[16px] mt-3 lg:mt-0">
             "Explore, Play, Conquer - Your Quizz Adventure Awaits!"
           </p>
 
-          <Link href={"/quizz"} className=" text-deepGreen text-[16px] mt-10 sm:mt-5">
+          <Link href={"/quizz"} className=" text-deepGreen text-[16px] lg:mt-10 mt-5">
             Take A Quizz
           </Link>
         </div>
 
-        <div className="flex flex-col sm:mt-10">
+        <div className="flex flex-col mt-10 lg:mt-0">
           <p className="text-deepGreen font-bold text-[20px]">Attributions</p>
-          <div className="flex gap-10 sm:flex-col mt-10">
+          <div className="flex gap-10 flex-col lg:flex-row mt-10">
             <div className="flex flex-col">
-              <div className=" sm:mt-3 text-slate-950 text-[16px]">
+              <div className="mt-3 lg:mt-0 text-slate-950 text-[16px]">
                 <a
                   target="_blank"
                   href="https://icons8.com/icon/112289/book"
