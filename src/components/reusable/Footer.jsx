@@ -9,18 +9,17 @@ const Footer = () => {
       <div className="flex justify-between flex-col lg:flex-row">
         <div className="flex flex-col">
           <Link href={"/"} className="flex gap-2 items-center mt-5 lg:mt-0">
-            <Image
-              src={Logo}
-              alt=""
-              className="lg:w-[75px] w-[50px] h-auto"
-            />
+            <Image src={Logo} alt="" className="lg:w-[75px] w-[50px] h-auto" />
             <p className={`lg:text-[32px] text-[20px] text-deepGreen`}>Quizz</p>
           </Link>
           <p className="text-slate-950 text-[16px] mt-3 lg:mt-0">
             "Explore, Play, Conquer - Your Quizz Adventure Awaits!"
           </p>
 
-          <Link href={"/quizz"} className=" text-deepGreen text-[16px] lg:mt-10 mt-5">
+          <Link
+            href={"/quizz"}
+            className=" text-deepGreen text-[16px] lg:mt-10 mt-5"
+          >
             Take A Quizz
           </Link>
         </div>
@@ -225,6 +224,14 @@ const Footer = () => {
                   className="underline"
                   href="https://www.freepik.com/free-vector/set-hand-drawn-questionnaire-elements_1035945.htm#query=test%20quiz&position=2&from_view=keyword&track=ais&uuid=b5e8b17d-925a-4353-97a8-3504c260fd64"
                 >
+                  Freepik
+                </a>
+              </div>
+              <div className="text-slate-950 text-[16px]">
+                Question Marks by{" "}
+                <a 
+                className="underline"
+                href="https://www.freepik.com/free-vector/hand-drawn-question-mark-pattern_26539471.htm#page=8&query=quiz&position=21&from_view=keyword&track=sph&uuid=67cc8752-684e-423a-b63d-7836d36276a7">
                   Freepik
                 </a>
               </div>
