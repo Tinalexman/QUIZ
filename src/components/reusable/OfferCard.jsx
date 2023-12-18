@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 function randomStart() {
   let x = Math.floor((Math.random() * 10) + 5);
   return [0, x, -x, 0];
-  return x;
 }
 
 const OfferCard = ({ image, name, key }) => {
