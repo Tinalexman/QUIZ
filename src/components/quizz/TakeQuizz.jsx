@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Nav from "../reusable/Nav";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const base = "https://the-trivia-api.com/v2/questions";
 const axios = require("axios");
@@ -30,15 +32,27 @@ const TakeQuizz = () => {
   const [change, setChange] = useState(false);
   const [status, setStatus] = useState(null);
   const [index, setIndex] = useState(-1);
+  const [score, setScore] = useState(0);
 
   function next() {
     setIndex(index + 1);
-    setAnswer(questions[index].correctAnswer);
     let ans = questions[index].incorrectAnswers;
     ans.push(questions[index].correctAnswer);
     shuffleArray(ans);
     questions[index].answers = ans;
     console.log(questions[index]);
+  }
+
+  function onSelect(value) {
+    console.log("In the select function");
+    let chosenAns = questions[index].answers[value];
+    if (chosenAns === questions[index].correctAnswer) {
+        setScore(score + 1);
+        toast.success('🥳🥳🥳 Wow. You are a genius!');
+    } else {
+        toast.error('😒😒😒 You wanna explain what happened there?');
+    }
+    next();
   }
 
   useEffect(() => {
@@ -51,7 +65,6 @@ const TakeQuizz = () => {
           setQuestions(resp.data);
           setStatus(true);
           setIndex(0);
-          setAnswer(resp.data[0].correctAnswer);
           let ans = resp.data[0].incorrectAnswers;
           ans.push(resp.data[0].correctAnswer);
           shuffleArray(ans);
@@ -66,74 +79,89 @@ const TakeQuizz = () => {
   }, []);
 
   return (
-    <div className="flex flex-col bg-mainCyan lg:h-[100vh] h-full w-[100vw]">
-      <Nav />
-      {(status === null || !status) && (
-        <div className="flex h-[90vh] w-[100vw] justify-center items-center">
-          <p>Loading</p>
-        </div>
-      )}
-      {status && status && (
-        <div className="flex lg:h-[90vh] lg:flex-row flex-col lg:justify-around lg:items-center">
-          <div className="bg-white w-[25vw] h-[70vh] rounded-2xl shadow-xl"></div>
-
-          <div className="bg-white w-[50vw] h-[70vh] rounded-2xl flex flex-col items-center shadow-xl px-16">
-            <p className="text-slate-700 text-4xl font-medium mt-10">
-              Question {index + 1} of {questions.length}
-            </p>
-            <p className="text-slate-400 mt-2 text-[18px]">
-              Difficulty:{" "}
-              <span className="text-mainYellow">
-                {capitalize(questions[index].difficulty)}
-              </span>
-            </p>
-
-            <p className="mt-10 text-slate-600 text-center">
-              {questions[index].question.text}
-            </p>
-
-            <div className="flex flex-col mt-10 gap-5 w-full">
-              {questions[index].answers.map((ans, i) => {
-                return (
-                  <motion.div
-                    animate={{
-                      x: randomStart(),
-                      transition: {
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      },
-                    }}
-                    whileHover={{
-                      scale: 1.05,
-                    }}
-                    key={i}
-                    className="text-black text-[16px] py-2 rounded-lg px-5 cursor-pointer
-                           hover:bg-mainYellow shadow-lg text-center border border-slate-200"
-                  >
-                    {ans}
-                  </motion.div>
-                );
-              })}
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        theme="colored"
+      />
+      <div className="flex flex-col bg-mainCyan lg:h-[100vh] h-auto w-[100vw]">
+        <Nav />
+        {(status === null || !status) && (
+          <div className="flex h-[90vh] w-[100vw] justify-center items-center">
+            <p>Loading</p>
+          </div>
+        )}
+        {status && status && (
+          <div className="flex lg:h-[90vh] gap-10 lg:flex-row flex-col lg:justify-around items-center">
+            <div className="bg-white mt-16 lg:mt-0 lg:w-[25vw] w-[50%] h-auto lg:h-[15vh] rounded-2xl shadow-xl flex flex-col items-center">
+              <p className="text-slate-950 lg:text-4xl text-2xl font-medium lg:mt-10 mt-5 mb-5 lg:mb-0">
+                Score: {score}
+              </p>
             </div>
 
-            <motion.button
-              animate={{
-                y: ["0%", "10%", "0%"],
-                transition: {
-                  duration: 3,
-                  repeat: Infinity,
-                },
-              }}
-              onClick={() => next()}
-              className="bg-deepGreen px-3 py-2 shadow-xl mt-10  w-full lg:w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium"
-            >
-              Next
-            </motion.button>
+            <div className="bg-white lg:w-[50vw] mb-20 lg:mb-0 w-[90vw] lg:h-[75vh] h-auto rounded-2xl flex flex-col items-center shadow-xl lg:px-16 px-10">
+              <p className="text-slate-700 lg:text-4xl text-2xl text-center font-medium mt-10">
+                Question {index + 1} of {questions.length}
+              </p>
+              <p className="text-slate-400 mt-2 text-[16px] lg:text-[18px]">
+                Difficulty:{" "}
+                <span className="text-mainYellow">
+                  {capitalize(questions[index].difficulty)}
+                </span>
+              </p>
+
+              <p className="mt-10 text-slate-600 text-center">
+                {questions[index].question.text}
+              </p>
+
+              <div className="flex flex-col mt-10 gap-5 w-full">
+                {questions[index].answers.map((ans, i) => {
+                  return (
+                    <motion.div
+                      animate={{
+                        x: randomStart(),
+                        transition: {
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                      }}
+                      whileHover={{
+                        scale: 1.05,
+                      }}
+                      onClick={() => {}}
+                      key={i}
+                      className="text-black text-[16px] py-2 rounded-lg px-5 cursor-pointer
+                           hover:bg-mainYellow shadow-lg text-center border border-slate-200"
+                    >
+                      {ans}
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <motion.button
+                animate={{
+                  y: ["0%", "10%", "0%"],
+                  transition: {
+                    duration: 3,
+                    repeat: Infinity,
+                  },
+                }}
+                onClick={() => onSelect(i)}
+                className="bg-deepGreen px-3 py-2 shadow-xl mt-10 lg:mb-0 mb-10  w-full lg:w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium"
+              >
+                Next
+              </motion.button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
