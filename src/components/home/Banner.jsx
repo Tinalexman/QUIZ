@@ -26,7 +26,7 @@ const Banner = () => {
               repeat: Infinity,
             },
           }}
-          onClick={() => window.location.href = "/quizz"}
+          onClick={() => window.location.href = "/quizz/take-a-quizz"}
           className="bg-deepGreen px-3 py-2 shadow-xl mt-16 lg:mt-8 w-full lg:w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium flex justify-center items-center gap-2"
         >
           Take A Quizz

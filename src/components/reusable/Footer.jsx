@@ -17,7 +17,7 @@ const Footer = () => {
           </p>
 
           <Link
-            href={"/quizz"}
+            href={"/quizz/take-a-quizz"}
             className=" text-deepGreen text-[16px] lg:mt-10 mt-5"
           >
             Take A Quizz

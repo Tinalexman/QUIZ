@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Nav from "../reusable/Nav";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const base = "https://the-trivia-api.com/v2/questions";
 const axios = require("axios");
@@ -26,8 +26,9 @@ function randomStart() {
 }
 
 const TakeQuizz = () => {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState();
 
+  const [fetched, setFetched] = useState(false);
   const [answer, setAnswer] = useState("");
   const [change, setChange] = useState(false);
   const [status, setStatus] = useState(null);
@@ -36,47 +37,51 @@ const TakeQuizz = () => {
 
   function next() {
     setIndex(index + 1);
-    let ans = questions[index].incorrectAnswers;
-    ans.push(questions[index].correctAnswer);
-    shuffleArray(ans);
-    questions[index].answers = ans;
+    // let ans = questions[index].incorrectAnswers;
+    // ans.push(questions[index].correctAnswer);
+    // shuffleArray(ans);
+    // questions[index].answers = ans;
     console.log(questions[index]);
   }
 
   function onSelect(value) {
-    console.log("In the select function");
     let chosenAns = questions[index].answers[value];
     if (chosenAns === questions[index].correctAnswer) {
-        setScore(score + 1);
-        toast.success('🥳🥳🥳 Wow. You are a genius!');
+      setScore(score + 1);
+      toast.success("🥳🥳🥳 Wow. You are a genius!");
     } else {
-        toast.error('😒😒😒 You wanna explain what happened there?');
+      toast.error("😒😒😒 You wanna explain what happened there?");
     }
-    next();
+    //next();
+    //setIndex(index + 1);
   }
 
   useEffect(() => {
-    if (questions.length === 0) {
-      axios({
-        method: "GET",
-        url: base,
-      })
-        .then((resp) => {
-          setQuestions(resp.data);
-          setStatus(true);
-          setIndex(0);
-          let ans = resp.data[0].incorrectAnswers;
-          ans.push(resp.data[0].correctAnswer);
-          shuffleArray(ans);
-          resp.data[0].answers = ans;
-          console.log(resp.data[0]);
-        })
-        .catch((err) => {
-          setQuestions([]);
-          setStatus(false);
-        });
+    if (!fetched) {
+      setFetched(true);
     }
   }, []);
+
+  if ((questions === undefined || questions === null) && !fetched) {
+    setFetched(true);
+    axios({
+      method: "GET",
+      url: base,
+    })
+      .then((resp) => {
+        setQuestions(resp.data);
+        setStatus(true);
+        setIndex(0);
+        let ans = resp.data[0].incorrectAnswers;
+        ans.push(resp.data[0].correctAnswer);
+        shuffleArray(ans);
+        resp.data[0].answers = ans;
+      })
+      .catch((err) => {
+        setQuestions([]);
+        setStatus(false);
+      });
+  }
 
   return (
     <>
@@ -95,7 +100,7 @@ const TakeQuizz = () => {
             <p>Loading</p>
           </div>
         )}
-        {status && status && (
+        {status && status && questions.length > 0 && (
           <div className="flex lg:h-[90vh] gap-10 lg:flex-row flex-col lg:justify-around items-center">
             <div className="bg-white mt-16 lg:mt-0 lg:w-[25vw] w-[50%] h-auto lg:h-[15vh] rounded-2xl shadow-xl flex flex-col items-center">
               <p className="text-slate-950 lg:text-4xl text-2xl font-medium lg:mt-10 mt-5 mb-5 lg:mb-0">
@@ -118,7 +123,7 @@ const TakeQuizz = () => {
                 {questions[index].question.text}
               </p>
 
-              <div className="flex flex-col mt-10 gap-5 w-full">
+              <div className="flex flex-col mt-10 gap-5 w-full lg:mb-0 mb-10">
                 {questions[index].answers.map((ans, i) => {
                   return (
                     <motion.div
@@ -133,7 +138,7 @@ const TakeQuizz = () => {
                       whileHover={{
                         scale: 1.05,
                       }}
-                      onClick={() => {}}
+                      onClick={() => onSelect(i)}
                       key={i}
                       className="text-black text-[16px] py-2 rounded-lg px-5 cursor-pointer
                            hover:bg-mainYellow shadow-lg text-center border border-slate-200"
@@ -144,7 +149,7 @@ const TakeQuizz = () => {
                 })}
               </div>
 
-              <motion.button
+              {/* <motion.button
                 animate={{
                   y: ["0%", "10%", "0%"],
                   transition: {
@@ -152,11 +157,11 @@ const TakeQuizz = () => {
                     repeat: Infinity,
                   },
                 }}
-                onClick={() => onSelect(i)}
+                
                 className="bg-deepGreen px-3 py-2 shadow-xl mt-10 lg:mb-0 mb-10  w-full lg:w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium"
               >
                 Next
-              </motion.button>
+              </motion.button> */}
             </div>
           </div>
         )}
