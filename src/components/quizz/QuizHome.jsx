@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Background from "@/public/Questions Background.jpg";
 import Logo from "@/public/Logo.png";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 import Arts from "@/public/Arts.png";
 import Food from "@/public/Food.png";
@@ -21,96 +22,44 @@ import OfferCard from "../reusable/OfferCard";
 import SelectCard from "../reusable/SelectCard";
 
 const QuizHome = () => {
-  const offers = [
-    {
-      image: Arts,
-      name: "Arts and Literature",
-    },
-    {
-      image: Food,
-      name: "Food and Drink",
-    },
-    {
-      image: Geography,
-      name: "Geography",
-    },
-    {
-      image: History,
-      name: "History",
-    },
-    {
-      image: Movie,
-      name: "Film and TV",
-    },
-    {
-      image: Music,
-      name: "Music",
-    },
-    {
-      image: Science,
-      name: "Science",
-    },
-    {
-      image: Society,
-      name: "Society and Culture",
-    },
-    {
-      image: Sports,
-      name: "Sports and Leisure",
-    },
-    {
-      image: Knowledge,
-      name: "General Knowledge",
-    },
-  ];
-
-  const [categories, setCategories] = useState([false, false, false, false, false, false, false, false, false, false]);
+  const [score, setScore] = useState("");
+  useEffect(() => {
+    let prevScore = window.localStorage.getItem("Score");
+    if (
+      prevScore !== undefined &&
+      !prevScore !== null &&
+      prevScore.length > 0
+    ) {
+      setScore(prevScore);
+    }
+  }, []);
 
   return (
     <div className="lg:h-[100vh] h-auto relative flex justify-center items-center">
       <Image
         src={Background}
         alt=""
-        className="lg:w-[100vw] lg:h-[100vh] object-cover absolute top-0 left-0 opacity-50 lg:block hidden"
+        className="w-[100vw] h-[100vh] object-cover absolute top-0 left-0 opacity-50"
       />
 
-      <div className="lg:w-[60%] bg-white z-10 rounded-[30px] px-10 flex flex-col items-center shadow-xl h-[90vh]">
-        <Image
-          src={Logo}
-          alt=""
-          className="lg:w-[75px] h-auto w-[50px] mt-10"
-        />
-        <p className="text-slate-800 lg:text-[18px] text-[16px] font-normal text-center mt-5">
-          Buckle up for your <span className="font-medium">Quizz</span>{" "}
-          adventure and let the exploration begin!
+      <div className="lg:w-[40%] w-[80%] absolute lg:top-[25vh] lg:left-[30%] top-[20vh] left-[10%] bg-white z-10 rounded-[30px] px-10 flex flex-col items-center shadow-xl lg:h-[50vh] h-[60vh]">
+        <Link href={"/"}>
+          <Image
+            src={Logo}
+            alt=""
+            className="lg:w-[75px] h-auto w-[50px] mt-10"
+          />
+        </Link>
+        <p className="text-slate-700 lg:text-[18px] text-[16px] font-normal text-center mt-5">
+          Buckle up for another <span className="font-medium">Quizz</span>{" "}
+          adventure
         </p>
 
-        <p className="text-slate-600 mt-5 lg:text-[14px] text-center">Note: you can only answer 10 questions per category and you can select as much categories as you want</p>
+        <p className="text-slate-800 mt-10 lg:text-[18px] text-center">
+          You answered <span className="font-medium">{score}</span> of 10
+          questions correctly
+        </p>
 
-        <div className="mt-10 flex flex-col w-full">
-          <div className="flex justify-around flex-col lg:justify-around lg:flex-row w-full">
-            {offers.map((offer, i) => {
-              return i < 5 ? (
-                <SelectCard key={i} image={offer.image} name={offer.name} selected={categories[i]}/>
-              ) : (
-                <></>
-              );
-            })}
-          </div>
-          <div className="flex justify-around flex-col mt-10 lg:justify-around lg:flex-row w-full">
-            {offers.map((offer, i) => {
-              return i >= 5 ? (
-                <SelectCard key={i} image={offer.image} name={offer.name} onClick={() => {
-                  categories[i] = !categories[i];
-                  setCategories(categories);
-                    
-                }} selected={categories[i]}/>
-              ) : (
-                <></>
-              );
-            })}
-          </div>
-        </div>
         <motion.button
           animate={{
             y: ["0%", "10%", "0%"],
@@ -119,10 +68,13 @@ const QuizHome = () => {
               repeat: Infinity,
             },
           }}
-          onClick={() => (window.location.href = "/quizz/take-a-quizz")}
+          onClick={() => {
+            window.localStorage.setItem("Score", "");
+            window.location.href = "/quizz/take-a-quizz";
+          }}
           className="bg-deepGreen px-3 py-2 shadow-xl mt-10  w-full lg:w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium"
         >
-          Start Quizz
+          Take Another Quizz
         </motion.button>
       </div>
     </div>

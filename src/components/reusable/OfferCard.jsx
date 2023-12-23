@@ -36,7 +36,7 @@ const OfferCard = ({ image, name, key }) => {
       }}
       className="flex flex-col bg-mainCyan lg:w-[150px] h-[150px] rounded-lg shadow-xl w-full items-center px-2 justify-center"
     >
-      <Image src={image} className="lg:w-[55px] h-auto" alt=" "/>
+      <Image src={image} className="lg:w-[55px] w-[40px] h-auto" alt=" "/>
       <p className="text-white mt-4 text-center text-[14px] font-medium cursor-default">
         {name}
       </p>
