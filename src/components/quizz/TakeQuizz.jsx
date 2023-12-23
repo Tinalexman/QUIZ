@@ -27,33 +27,30 @@ function randomStart() {
 
 const TakeQuizz = () => {
   const [questions, setQuestions] = useState();
+  const [answers, setAnswers] = useState();
 
   const [fetched, setFetched] = useState(false);
-  const [answer, setAnswer] = useState("");
-  const [change, setChange] = useState(false);
   const [status, setStatus] = useState(null);
   const [index, setIndex] = useState(-1);
   const [score, setScore] = useState(0);
 
   function next() {
-    setIndex(index + 1);
-    // let ans = questions[index].incorrectAnswers;
-    // ans.push(questions[index].correctAnswer);
-    // shuffleArray(ans);
-    // questions[index].answers = ans;
-    console.log(questions[index]);
+    let ans = questions[index + 1].incorrectAnswers;
+    ans.push(questions[index + 1].correctAnswer);
+    shuffleArray(ans);
+    setAnswers(ans);
+    setIndex(index + 1);  
   }
 
   function onSelect(value) {
-    let chosenAns = questions[index].answers[value];
+    let chosenAns = answers[value];
     if (chosenAns === questions[index].correctAnswer) {
       setScore(score + 1);
       toast.success("🥳🥳🥳 Wow. You are a genius!");
     } else {
       toast.error("😒😒😒 You wanna explain what happened there?");
     }
-    //next();
-    //setIndex(index + 1);
+    next();
   }
 
   useEffect(() => {
@@ -70,15 +67,16 @@ const TakeQuizz = () => {
     })
       .then((resp) => {
         setQuestions(resp.data);
-        setStatus(true);
-        setIndex(0);
         let ans = resp.data[0].incorrectAnswers;
         ans.push(resp.data[0].correctAnswer);
         shuffleArray(ans);
-        resp.data[0].answers = ans;
+        setAnswers(ans);
+        setStatus(true);
+        setIndex(0);
       })
       .catch((err) => {
         setQuestions([]);
+        setAnswers([]);
         setStatus(false);
       });
   }
@@ -87,9 +85,9 @@ const TakeQuizz = () => {
     <>
       <ToastContainer
         position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
+        autoClose={1000}
+        hideProgressBar={true}
+        newestOnTop={true}
         rtl={false}
         theme="colored"
       />
@@ -124,7 +122,7 @@ const TakeQuizz = () => {
               </p>
 
               <div className="flex flex-col mt-10 gap-5 w-full lg:mb-0 mb-10">
-                {questions[index].answers.map((ans, i) => {
+                {answers.map((ans, i) => {
                   return (
                     <motion.div
                       animate={{
@@ -148,20 +146,6 @@ const TakeQuizz = () => {
                   );
                 })}
               </div>
-
-              {/* <motion.button
-                animate={{
-                  y: ["0%", "10%", "0%"],
-                  transition: {
-                    duration: 3,
-                    repeat: Infinity,
-                  },
-                }}
-                
-                className="bg-deepGreen px-3 py-2 shadow-xl mt-10 lg:mb-0 mb-10  w-full lg:w-[200px] hover:bg-mainYellow hover:text-slate-950 font-medium"
-              >
-                Next
-              </motion.button> */}
             </div>
           </div>
         )}
