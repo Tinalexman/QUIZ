@@ -34,10 +34,10 @@ const OfferCard = ({ image, name, key }) => {
       whileHover={{
         scale: 1.2,
       }}
-      className="flex flex-col bg-mainCyan lg:w-[150px] h-[150px] rounded-lg shadow-xl w-full items-center px-2 justify-center"
+      className="flex flex-col cursor-pointer bg-mainCyan w-[150px] h-[150px] rounded-lg shadow-xl items-center px-2 justify-center"
     >
       <Image src={image} className="lg:w-[55px] w-[40px] h-auto" alt=" "/>
-      <p className="text-white mt-4 text-center text-[14px] font-medium cursor-default">
+      <p className="text-white mt-4 text-center text-[12px] lg:text-[14px] font-medium cursor-default">
         {name}
       </p>
     </motion.div>

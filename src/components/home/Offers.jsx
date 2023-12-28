@@ -57,7 +57,7 @@ const Offers = () => {
   ];
 
   return (
-    <div className="py-20 flex flex-col bg-white px-[10%]">
+    <div className="py-20 flex flex-col bg-white px-[5%]">
       <p className="text-deepGreen font-extrabold text-2xl lg:text-4xl text-center">
         Categories
       </p>
@@ -65,25 +65,26 @@ const Offers = () => {
         Dive into a world of quizzes designed to entertain and educate
       </p>
 
-      <div className="flex justify-around mt-20 gap-10 flex-col lg:flex-row w-full px-[10%]">
-        {offers.map((offer, i) => {
-          return i < 5 ? (
-            <OfferCard key={i} image={offer.image} name={offer.name} />
-          ) : (
-            <></>
-          );
-        })}
+      <div className="flex lg:flex-col flex-row gap-0 lg:gap-20 mt-20">
+        <div className="flex justify-around items-center gap-10 flex-col lg:flex-row w-full lg:px-[10%] px-0">
+          {offers.map((offer, i) => {
+            return i < 5 ? (
+              <OfferCard key={i} image={offer.image} name={offer.name} />
+            ) : (
+              <></>
+            );
+          })}
+        </div>
+        <div className="flex justify-around items-center gap-10 flex-col lg:flex-row w-full lg:px-[10%] px-0">
+          {offers.map((offer, i) => {
+            return i >= 5 ? (
+              <OfferCard key={i} image={offer.image} name={offer.name} />
+            ) : (
+              <></>
+            );
+          })}
+        </div>
       </div>
-      <div className="flex justify-around mt-20 gap-10 flex-col lg:flex-row w-full px-[10%]">
-        {offers.map((offer, i) => {
-          return i >= 5 ? (
-            <OfferCard key={i} image={offer.image} name={offer.name} />
-          ) : (
-            <></>
-          );
-        })}
-      </div>
-      
     </div>
   );
 };
