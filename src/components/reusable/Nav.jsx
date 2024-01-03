@@ -28,10 +28,10 @@ const Nav = ({ useCyan = false }) => {
           Home
         </Link>
         <Link
-          href={"/"}
+          href={"/about"}
           className="hover:underline text-deepGreen font-medium text-[20px]"
         >
-          About Me
+          About
         </Link>
         <Link
           href={"/quizz/take-a-quizz"}
